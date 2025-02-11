@@ -113,6 +113,18 @@ hr {
     margin-top: 0; /* remove top margin */
 }
 
+/* Special styling for media section to show links in two columns */
+#media .link-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    max-width: 640px; /* Adjust based on your link width preferences */
+}
+
+#media .link-list li {
+    margin: 0; /* Remove default margins since we're using grid gap */
+}
+
 .link-list li {
     margin: 8px 0;
 }
