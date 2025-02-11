@@ -7,6 +7,7 @@
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -133,9 +134,13 @@
                 <h2>Internet Address</h2>
                 <span id="rdns">N/A</span>
                 <h2>Exit Location</h2>
-                <span id="location">N/A</span></p>
+                <span id="location">N/A</span>
                 <h2>Provider</h2>
-                <span id="isp">N/A</span></p>
+                <span id="isp">N/A</span>
+                <hr>
+                <h2>Ping Test</h2>
+                <button id="pingTestButton" onclick="startPingTest()" class="ping-button">Start Ping Test</button>
+                <canvas id="pingChart" width="600" height="200"></canvas>
                 <hr>
                 <h2>Links</h2>
                 <ul class="link-list">

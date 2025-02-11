@@ -230,3 +230,24 @@ input:checked + .toggle-slider:before {
 .sun-item h2 {
     margin-top: 0;
 }
+
+.ping-button {
+    font-size: 16pt;
+    font-weight: 600;
+    padding: 12px 24px;
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: none;
+    border-radius: var(--button-radius);
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: background-color 0.3s;
+}
+
+.ping-button:hover {
+    background-color: var(--button-hover-bg);
+}
+
+#pingChart {
+    margin: 20px 0;
+}
