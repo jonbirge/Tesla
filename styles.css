@@ -65,7 +65,7 @@ p {
 
 hr {
     border: 0;
-    border-top: 1px solid var(--separator-color);
+    border-top: 2px solid var(--separator-color);
     margin-top: 28px;
     margin-bottom: 28px;
 }
@@ -110,23 +110,25 @@ hr {
 .link-list {
     list-style: none;
     padding: 0;
-    margin-top: 0; /* remove top margin */
+    margin-top: 0px; /* remove top margin */
 }
 
 /* Special styling for media section to show links in two columns */
-#media .link-list {
+#media .link-list,
+#travel .link-list {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
     max-width: 640px; /* Adjust based on your link width preferences */
 }
 
-#media .link-list li {
+#media .link-list li,
+#travel .link-list li {
     margin: 0; /* Remove default margins since we're using grid gap */
 }
 
 .link-list li {
-    margin: 8px 0;
+    margin: 15px 0px;
 }
 
 .link-list a {
