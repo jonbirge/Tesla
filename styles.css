@@ -234,7 +234,8 @@ input:checked + .toggle-slider:before {
 .ping-button {
     font-size: 16pt;
     font-weight: 600;
-    padding: 12px 24px;
+    padding: 24px;
+    width: 280px;
     background-color: var(--button-bg);
     color: var(--button-text);
     border: none;

@@ -205,6 +205,9 @@ function startPingTest() {
     // Clear previous data
     pingData = [];
     
+    // Get the Tesla blue color from CSS
+    const teslaBlue = getComputedStyle(document.documentElement).getPropertyValue('--tesla-blue').trim();
+    
     // Initialize chart
     const ctx = document.getElementById('pingChart').getContext('2d');
     pingChart = new Chart(ctx, {
@@ -214,15 +217,15 @@ function startPingTest() {
             datasets: [{
                 label: 'Ping (ms)',
                 data: pingData,
-                borderColor: 'var(--tesla-blue)',
-                borderWidth: 1,
+                borderColor: teslaBlue,
+                borderWidth: 3, // Thicker line
                 fill: false,
                 pointRadius: 0
             }]
         },
         options: {
             responsive: true,
-            animation: false,
+            animation: true,
             scales: {
                 x: {
                     type: 'linear',
@@ -231,7 +234,22 @@ function startPingTest() {
                         color: 'var(--separator-color)'
                     },
                     ticks: {
-                        color: 'var(--text-color)'
+                        color: 'var(--text-color)',
+                        font: {
+                            family: 'Inter',
+                            size: 14,
+                            weight: 600
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Time (seconds)',
+                        color: 'var(--text-color)',
+                        font: {
+                            family: 'Inter',
+                            size: 16,
+                            weight: 600
+                        }
                     }
                 },
                 y: {
@@ -241,7 +259,22 @@ function startPingTest() {
                         color: 'var(--separator-color)'
                     },
                     ticks: {
-                        color: 'var(--text-color)'
+                        color: 'var(--text-color)',
+                        font: {
+                            family: 'Inter',
+                            size: 14,
+                            weight: 600
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Ping (ms)',
+                        color: 'var(--text-color)',
+                        font: {
+                            family: 'Inter',
+                            size: 16,
+                            weight: 600
+                        }
                     }
                 }
             },
@@ -270,7 +303,6 @@ function pingTestServer() {
             if (pingData.length > 60) {
                 pingData.shift(); // Keep last 60 seconds
             }
-            
             pingChart.data.labels = Array.from({ length: pingData.length }, (_, i) => i);
             pingChart.update('none'); // Update without animation for better performance
         })
