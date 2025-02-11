@@ -7,6 +7,7 @@
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -124,8 +125,8 @@
                     <li><a href="https://poki.com">Poki (Casual Games)</a></li>
                     <li><a href="https://nyc.birgefuller.com/Mandelbrot/">Mandelbrot Explorer</a></li>
                     <li><a href="https://nyc.birgefuller.com/HP/">RPN Calculator</a></li>
-                    <li><a href="https://www.tes.app">Tes.App</a></li>
                     <li><a href="https://lightroom.adobe.com/shares/3e89edbc7e0b4894905df16a85a1e71a">Aerial Tilt-Shift Gallery</a></li>
+                    <li><a href="https://www.tes.app">Tes.App</a></li>
                 </ul>
             </div>
 
@@ -133,9 +134,13 @@
                 <h2>Internet Address</h2>
                 <span id="rdns">N/A</span>
                 <h2>Exit Location</h2>
-                <span id="location">N/A</span></p>
+                <span id="location">N/A</span>
                 <h2>Provider</h2>
-                <span id="isp">N/A</span></p>
+                <span id="isp">N/A</span>
+                <hr>
+                <h2>Health</h2>
+                <button id="pingTestButton" onclick="startPingTest()" class="ping-button">Start Ping Test</button>
+                <canvas id="pingChart" width="600" height="200"></canvas>
                 <hr>
                 <h2>Links</h2>
                 <ul class="link-list">
@@ -148,7 +153,7 @@
                 <h2>About</h2>
                 <p>This service was created by <a href="https://www.mit.edu/~birge">Jonathan Birge</a> as a personal project. It is not affiliated with Tesla, Inc.</p>
                 <p>If there turns out to be any interest in this, future versions may include things like better inline weather information and maps, local links based on your current location, and per user customization.</p>
-                <p>Apologies in advance to those outside of the US; right now some functionality is limited to CONUS. If you're outside that region and have any suggestions, please reach out.</p>
+                <p>Apologies to those outside of the US; right now some functionality is limited to CONUS.</p>
                 <p>For questions or feedback, please email <a href="mailto:admin@teslas.cloud">admin@teslas.cloud</a> or submit an issue to the <a href="https://github.com/jonbirge/Tesla">GitHub repository</a>.
                 <hr>
                 <h2>Tips</h2>

@@ -5,6 +5,9 @@ let sunrise = null;
 let sunset = null;
 let moonPhaseData = null;
 let manualDarkMode = false;
+let pingChart = null;
+let pingInterval = null;
+let pingData = [];
 
 function toggleMode() {
     manualDarkMode = true;
@@ -188,6 +191,124 @@ function showSection(sectionId) {
             console.log('Skipping update, too soon...');
         }
     }
+}
+
+function startPingTest() {
+    if (pingInterval) {
+        // Stop existing test
+        clearInterval(pingInterval);
+        pingInterval = null;
+        document.getElementById('pingTestButton').textContent = 'Start Ping Test';
+        return;
+    }
+
+    // Clear previous data
+    pingData = [];
+    
+    // Get the Tesla blue color from CSS
+    const teslaBlue = getComputedStyle(document.documentElement).getPropertyValue('--tesla-blue').trim();
+    
+    // Initialize chart
+    const ctx = document.getElementById('pingChart').getContext('2d');
+    pingChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [{
+                label: 'Ping (ms)',
+                data: pingData,
+                borderColor: teslaBlue,
+                borderWidth: 3, // Thicker line
+                fill: false,
+                pointRadius: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            animation: true,
+            scales: {
+                x: {
+                    type: 'linear',
+                    display: true,
+                    grid: {
+                        color: 'var(--separator-color)'
+                    },
+                    ticks: {
+                        color: 'var(--text-color)',
+                        font: {
+                            family: 'Inter',
+                            size: 14,
+                            weight: 600
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Time (seconds)',
+                        color: 'var(--text-color)',
+                        font: {
+                            family: 'Inter',
+                            size: 16,
+                            weight: 600
+                        }
+                    }
+                },
+                y: {
+                    display: true,
+                    beginAtZero: true,
+                    grid: {
+                        color: 'var(--separator-color)'
+                    },
+                    ticks: {
+                        color: 'var(--text-color)',
+                        font: {
+                            family: 'Inter',
+                            size: 14,
+                            weight: 600
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Ping (ms)',
+                        color: 'var(--text-color)',
+                        font: {
+                            family: 'Inter',
+                            size: 16,
+                            weight: 600
+                        }
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+
+    // Start pinging
+    document.getElementById('pingTestButton').textContent = 'Stop Test';
+    pingInterval = setInterval(pingTestServer, 1000);
+}
+
+function pingTestServer() {
+    const startTime = performance.now();
+    fetch('ping.php', { 
+        cache: 'no-store',
+        method: 'HEAD'  // Only get headers, we don't need content
+    })
+        .then(() => {
+            const pingTime = performance.now() - startTime;
+            pingData.push(pingTime);
+            if (pingData.length > 60) {
+                pingData.shift(); // Keep last 60 seconds
+            }
+            pingChart.data.labels = Array.from({ length: pingData.length }, (_, i) => i);
+            pingChart.update('none'); // Update without animation for better performance
+        })
+        .catch(error => {
+            console.error('Ping failed:', error);
+        });
 }
 
 // Update location on page load and every minute thereafter
